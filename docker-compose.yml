@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+    mongodb:
+        image: "mongo:4-bionic"
+        volumes: 
+            - ./auth/data:/data/db
+    auth:
+        build: 
+            context: ./auth
+            dockerfile: Dockerfile.dev
+    app:
+        build: ./app
+        volumes:
+            - ./app/data:/usr/src/app/data
+            - ./app/src:/usr/src/app/src
+    nginx:
+        build: ./ghi
+        ports:
+            - 8910:80
+        volumes:
+            - ./ghi/static:/usr/share/nginx/html
+        
