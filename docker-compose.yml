@@ -8,6 +8,7 @@ services:
     auth:
         build: 
             context: ./auth
+            # had to force dockerfile here, since it wouldn't recognize the .dev extension for some reason
             dockerfile: Dockerfile.dev
     app:
         build: ./app
@@ -20,4 +21,3 @@ services:
             - 8910:80
         volumes:
             - ./ghi/static:/usr/share/nginx/html
-        
